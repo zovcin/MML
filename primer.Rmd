@@ -1,0 +1,60 @@
+---
+title: "Matematičke osnove mašinskog učenja"
+output:
+  word_document: default
+  pdf_document: default
+  html_document:
+    df_print: paged
+  latex_document: default
+  html_notebook: default
+---
+
+Ovde vidimo upotrebu [R Markdown](http://www.rstudio.org/docs/authoring/using_markdown) 
+koristeći alat [knitr](http://yihui.name/knitr/) unutar Rstudio.
+Na ovaj način dobijamo prikaz komandi sa narativnim opisom i rezultat nmjihovog izvršavanja.
+
+<!-- more -->
+
+## Za početak
+Da bi se koristio R Markdown, treba:
+
+* Instalirati [R](http://www.r-project.org/)
+* Instalirati [RStudio](http://rstudio.org/download/) 
+* Instalirati *knitr* paket: `install.packages("knitr") `
+* Da bi izvršili ovaj kod u R Studiju idite na File -> New -> R Markdown
+* Instalirajte *matlib* paket: `install.packages("matlib") ` i pakete koje *matlib* povlači
+* Sačuvajte sa `.rmd` ekstenzijom
+* Kliknite na Knit HTML
+
+
+### Zadatak
+
+Data je matrica $A_\Phi$ linearne transformacije $\Phi : \mathbb{R}^{4\times1} \rightarrow \mathbb{R}^{4\times1}$: $A_\Phi = \begin{bmatrix}  1 & 0 &-2 & 1 \\  2 &-1 & 0 & 1 \\  3 &-2 & 2 & 1 \\  2 & 0 &-4 & 2 \\ \end{bmatrix}$.
+  
+1.  Naći $\dim \;\mbox{Im}\; \Phi$ i $\dim \;\mbox{Ker}\; \Phi$.
+Primenjujući elementarne (Gausove) transformacije na matricu $A_\Phi$ dobijamo
+```{r,results = 'asis'}
+library('matlib')
+a1=c( 1, 2, 3, 2)
+a2=c( 0,-1,-2, 0)
+a3=c(-2, 0, 2,-4)
+a4=c( 1, 1, 1, 2)
+a=cbind(a1,a2,a3,a4)
+gaussianElimination(a)
+```
+odakle vidimo da je $\;\mbox{rank}\; A_\Phi = \dim \;\mbox{Im}\; \Phi = 2$. Onda je $\dim \;\mbox{Ker}\; \Phi = 4 - 2 = 2$.
+
+2. Naći bazu prostora $\;\mbox{Im}\; \Phi$.
+Iz rezultata primene Gausove eliminacije vidimo da su prve dve kolone matrice $A_\Phi$ linearno nezavisne.
+Zato je $\;\mbox{Im}\; \Phi = \;\mbox{span}\; [ \begin{bmatrix}  1 \\  2  \\ 3 \\  2 \\ \end{bmatrix}, \begin{bmatrix}  0 \\  -1 \\  -2 \\ 0 \\ \end{bmatrix} ]$
+
+3. Naći ortogonalnu bazu prostora $\;\mbox{Im}\; \Phi$.
+```{r,results = 'asis'}
+u1=c( 1,  2,  3,  2)
+u2=c( 0, -1, -2,  0)
+b=cbind(u1,u2)
+bgs=GramSchmidt(b,normalize = FALSE, verbose = TRUE)
+# Da bismo dobili cele brojeve
+bgs %*% diag(c(1,9))
+```
+Vidimo da je $\;\mbox{Im}\; \Phi = \;\mbox{span}\; [ \begin{bmatrix}  1 \\  2  \\ 3 \\  2 \\ \end{bmatrix}, \begin{bmatrix}  4 \\  -1 \\  -6 \\ 8 \\ \end{bmatrix} ]$
