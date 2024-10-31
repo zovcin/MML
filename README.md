@@ -7,12 +7,10 @@ Sintaksa razmene tekstova je objašnjena u [Markdown](https://en.wikipedia.org/w
 
 Additionally, it provides some handy settings for VS Code users.
 
-You may remove `.markdown-wiki-template` directory if you don't need this documentation.
-
 **Sadržaj predmeta:**
 
 - [Preduslovi](#Preduslovi)
-- [Početak](#Poćetak)
+- [Početak](#Početak)
 - [Images](#images)
   - [`.images` directory](#images-directory)
   - [`pre-commit` hook](#pre-commit-hook)
