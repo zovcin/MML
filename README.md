@@ -1,20 +1,18 @@
 # MML
 Matematičke osnove mašinskog učenja
 
-Ovo je je ripozitorijum za razmenu materijala vezanog za predmet Matematičke osnove mašinskog učenja na Master akademskim studijama Veštačka interligencija i mašinsko učenje na Fakultetu tehničkih nauka Univerziteta u Novom Sadu.
+Ovo je je ripozitorijum za razmenu materijala vezanog za predmet Matematičke osnove mašinskog učenja na Master akademskim studijama Veštačka inteligencija i mašinsko učenje na Fakultetu tehničkih nauka Univerziteta u Novom Sadu.
 
-This is a template to be cloned to quickly set up a repository for keeping documentation in [Markdown](https://en.wikipedia.org/wiki/Markdown).
-
-Specifically, it arranges how image files are handled.
+Sintaksa razmene tekstova je objašnjena u [Markdown](https://en.wikipedia.org/wiki/Markdown).
 
 Additionally, it provides some handy settings for VS Code users.
 
 You may remove `.markdown-wiki-template` directory if you don't need this documentation.
 
-**Table of content:**
+**Sadržaj predmeta:**
 
-- [Prerequisites](#prerequisites)
-- [Get started](#get-started)
+- [Preduslovi](#Preduslovi)
+- [Početak](#Poćetak)
 - [Images](#images)
   - [`.images` directory](#images-directory)
   - [`pre-commit` hook](#pre-commit-hook)
@@ -27,12 +25,21 @@ You may remove `.markdown-wiki-template` directory if you don't need this docume
 
 ## Prerequisites
 
-- OS: GNU Linux / Mac (though it's not tested for Mac yet - it _**should**_ work there)
+- Predznanje: Algebra / Linearna algebra Osnovne akademske studije
+https://imft.ftn.uns.ac.rs/rade/elektro_diskretna_e1.html
+https://imft.ftn.uns.ac.rs/rade/elektro_diskretna_e2.html
+https://imft.ftn.uns.ac.rs/maja/Algebra
+https://imft.ftn.uns.ac.rs/~Ksenija/Algebr_Ra%c4%8dunarstvo.html
+https://imft.ftn.uns.ac.rs/~Ksenija/Algebra_SW.html
+https://people.dmi.uns.ac.rs/~anna.slivkova/Zadaci%20iz%20linearne%20algebre.pdf
+
+
+- OS: GNU Linux / Mac / MS Windows **bi trebalo da podržava**
 - `git` available on `$PATH`
 
-## Get started
+## Početak
 
-Download this repository to your local machine:
+Skinuti knjigu [Markdown](https://en.wikipedia.org/wiki/Markdown)
 
 ```shell
 git clone https://github.com/vsudakov/markdown-wiki-template.git
