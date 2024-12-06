@@ -31,6 +31,23 @@ https://imft.ftn.uns.ac.rs/~Ksenija/Algebr_Ra%c4%8dunarstvo.html
 https://imft.ftn.uns.ac.rs/~Ksenija/Algebra_SW.html
 https://people.dmi.uns.ac.rs/~anna.slivkova/Zadaci%20iz%20linearne%20algebre.pdf
 
+E9-05-2021
+E9-01-2024
+E9-02-2024
+E9-03-2024
+E9-04-2024
+E9-05-2024
+E9-06-2024
+E9-07-2024
+E9-08-2024
+E9-09-2024
+E9-10-2024
+E9-11-2024
+E9-12-2024
+E9-13-2024
+E9-14-2024
+
+
 
 - OS: GNU Linux / Mac / MS Windows **bi trebalo da podržava**
 - `git` available on `$PATH`
