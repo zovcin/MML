@@ -31,23 +31,39 @@ https://imft.ftn.uns.ac.rs/~Ksenija/Algebr_Ra%c4%8dunarstvo.html
 https://imft.ftn.uns.ac.rs/~Ksenija/Algebra_SW.html
 https://people.dmi.uns.ac.rs/~anna.slivkova/Zadaci%20iz%20linearne%20algebre.pdf
 
-E9-05-2021
-E9-01-2024
-E9-02-2024
-E9-03-2024
-E9-04-2024
-E9-05-2024
-E9-06-2024
-E9-07-2024
-E9-08-2024
-E9-09-2024
-E9-10-2024
-E9-11-2024
-E9-12-2024
-E9-13-2024
-E9-14-2024
+E9-05-2021 Problem 5.1 Backtracking LS
+
+E9-01-2024 Problem 5.2 Backtracking LS
+
+E9-02-2024 Problem 5.3 Backtracking LS
+
+E9-03-2024 Problem 5.4 Backtracking LS
+
+E9-04-2024 Problem 5.5 Backtracking LS
+
+E9-05-2024 Problem 5.6 Backtracking LS
+
+E9-06-2024 Problem 5.1 LS
+
+E9-07-2024 Problem 5.2 LS
+
+E9-08-2024 Problem 5.3 LS
+
+E9-09-2024 Problem 5.4 LS
+
+E9-10-2024 Problem 5.5 LS
+
+E9-11-2024 Problem 5.6 LS
+
+E9-12-2024 Problem 5.1 Newton
+
+E9-13-2024 Problem 5.2 Newton
+
+E9-14-2024 Problem 5.3 Newton
 
 
+
+****
 
 - OS: GNU Linux / Mac / MS Windows **bi trebalo da podržava**
 - `git` available on `$PATH`
