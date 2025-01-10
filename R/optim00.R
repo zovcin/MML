@@ -81,7 +81,7 @@ gfn <- function(x) {
 }
 
 n <- 4
-result <- optim00(britn = 50000, x0 = matrix(1+0*(1:n),ncol = 1)/5, fn = fn, gfn = gfn)
+result <- optim00(britn = 50000, x0 = matrix(1+0*(1:n),ncol = 1)/5, fn, gfn)
 print(result)
 result$x0  # Final value of x
 result$y0  # Final function value
