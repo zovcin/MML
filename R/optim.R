@@ -67,7 +67,7 @@ gfn <- function(x) {
   return(g)
 }
 
-result <- optim(britn = 200, x0 = matrix(c(-3,-1),ncol = 1), fn = fn, gfn = gfn)
+result <- optim(britn = 200, x0 = matrix(c(-3,-1),ncol = 1), fn, gfn)
 print(result)
 result$x0  # Final value of x
 result$y0  # Final function value
