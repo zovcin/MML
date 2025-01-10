@@ -100,7 +100,9 @@ hfn <- function(x) {
 }
 
 n <- 4
-result <- optim03(britn = 50000, x0 = matrix(1+0*(1:n),ncol = 1)/5, fn = fn, gfn = gfn, hfn = hfn)
+
+result <- optim02(50000, matrix(1+0*(1:n),ncol = 1)/5, fn)
+result <- optim03(britn = 50000, matrix(1+0*(1:n),ncol = 1)/5, fn, gfn, hfn)
 print(result)
 result$x1  # Final value of x
 result$y1  # Final function value
