@@ -122,35 +122,35 @@ ls <- function(x0, y0, fn, g0, d, maxstep, steptol, maxfcalcls) {
   retcode <- 3
   fcalcls <- 0
   alpha <- 0.0001
-
+  
   Newtlen <- sqrt(sum(d^2))
   if (Newtlen > maxstep) {
     d <- d * (maxstep / Newtlen)
     Newtlen <- maxstep
   }
-
+  
   initslope <- sum(g0 * d)
-
+  
   rellength <- 0
   for (i in 1:n) {
     rellength <- max(rellength, abs(d[i]) / max(abs(x0[i]), 1))
   }
-
+  
   minlambda <- steptol / rellength
   lambda <- 1
-
+  
   if (maxfcalcls == 0) {
     x1 <- x0
     y1 <- y0
     retcode <- 2
     return(list(x1 = x1, y1 = y1, retcode = retcode, lambda = lambda, maxtaken = maxtaken, d = d, fcalcls = fcalcls))
   }
-
+  
   while (retcode > 2) {
     x1 <- x0 + lambda * d
     y1 <- fn(x1)
     fcalcls <- fcalcls + 1
-
+    
     if (y1 <= y0 + alpha * lambda * initslope) {
       retcode <- 0
       if ((lambda == 1) && (Newtlen > 0.99 * maxstep)) {
@@ -174,21 +174,21 @@ ls <- function(x0, y0, fn, g0, d, maxstep, steptol, maxfcalcls) {
         a <- tempm[1]
         b <- tempm[2]
         disc <- b^2 - 3 * a * initslope
-
+        
         if (a == 0) {
           lambda_temp <- -initslope / (2 * b)
         } else {
           lambda_temp <- (-b + sqrt(disc)) / (3 * a)
         }
-
+        
         if (lambda_temp > 0.5 * lambda) {
           lambda_temp <- 0.5 * lambda
         }
       }
-
+      
       lambda_prev <- lambda
       y_prev <- y1
-
+      
       if (lambda_temp <= 0.1 * lambda) {
         lambda <- 0.1 * lambda
       } else {
@@ -218,7 +218,8 @@ fn <- function(x) {
 }
 
 n <- 4
-result <- optim02(britn = 50000, x0 = matrix(1+0*(1:n),ncol = 1)/5, fn = fn)
+
+result <- optim02(50000, matrix(1+0*(1:n),ncol = 1)/5, fn)
 print(result)
 result$x1  # Final value of x
 result$y1  # Final function value
