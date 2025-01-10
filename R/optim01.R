@@ -1,4 +1,4 @@
-optim01 <- function(britn, x0, fn, gfn ) {
+optim01 <- function(britn, x0, fn, gfn = NULL) {
   # Iterative method for deterministic optimization problem
   #
   # Usage:
@@ -93,29 +93,6 @@ optim01 <- function(britn, x0, fn, gfn ) {
   return(list(x1 = x1, y1 = y1, g1 = g1, termcode = termcode, itncount = itncount))
 }
 
-# Forward difference gradient approximation
-fdgrad <- function(xc, fc, fn, eta) {
-  n <- length(xc)
-  g <- numeric(n)
-  sqrteta <- sqrt(eta)
-
-  for (j in 1:n) {
-    if (xc[j] == 0) {
-      stepsizej <- sqrteta
-    } else {
-      stepsizej <- sqrteta * max(abs(xc[j]), 1) * sign(xc[j])
-    }
-    tempj <- xc[j]
-    xc[j] <- xc[j] + stepsizej
-    stepsizej <- xc[j] - tempj
-    fj <- fn(xc)
-    g[j] <- (fj - fc) / stepsizej
-    xc[j] <- tempj
-  }
-
-  return(g)
-}
-
 # Line search function
 ls <- function(x0, y0, fn, g0, d, maxstep, steptol, maxfcalcls) {
   n <- length(x0)
@@ -123,35 +100,35 @@ ls <- function(x0, y0, fn, g0, d, maxstep, steptol, maxfcalcls) {
   retcode <- 3
   fcalcls <- 0
   alpha <- 0.0001
-
+  
   Newtlen <- sqrt(sum(d^2))
   if (Newtlen > maxstep) {
     d <- d * (maxstep / Newtlen)
     Newtlen <- maxstep
   }
-
+  
   initslope <- sum(g0 * d)
-
+  
   rellength <- 0
   for (i in 1:n) {
     rellength <- max(rellength, abs(d[i]) / max(abs(x0[i]), 1))
   }
-
+  
   minlambda <- steptol / rellength
-  lambda <- 1.0
-
+  lambda <- 1
+  
   if (maxfcalcls == 0) {
     x1 <- x0
     y1 <- y0
     retcode <- 2
     return(list(x1 = x1, y1 = y1, retcode = retcode, lambda = lambda, maxtaken = maxtaken, d = d, fcalcls = fcalcls))
   }
-
+  
   while (retcode > 2) {
     x1 <- x0 + lambda * d
     y1 <- fn(x1)
     fcalcls <- fcalcls + 1
-
+    
     if (y1 <= y0 + alpha * lambda * initslope) {
       retcode <- 0
       if ((lambda == 1) && (Newtlen > 0.99 * maxstep)) {
@@ -167,29 +144,29 @@ ls <- function(x0, y0, fn, g0, d, maxstep, steptol, maxfcalcls) {
       if (lambda == 1) {
         lambda_temp <- -initslope / (2 * (y1 - y0 - initslope))
       } else {
-        tempm <- 1 / (lambda - lambda_prev) *
+        tempm <- c(1 / (lambda - lambda_prev)) *
           matrix(c(1 / lambda^2, -1 / lambda_prev^2,
                    -lambda_prev / lambda^2, lambda / lambda_prev^2),
-                 nrow = 2) %*%
-          c(y1 - y0 - lambda * initslope, y_prev - y0 - lambda_prev * initslope)
+                 nrow = 2, byrow = T) %*%
+          matrix(c(y1 - y0 - lambda * initslope, y_prev - y0 - lambda_prev * initslope), ncol = 1)
         a <- tempm[1]
         b <- tempm[2]
         disc <- b^2 - 3 * a * initslope
-
+        
         if (a == 0) {
           lambda_temp <- -initslope / (2 * b)
         } else {
           lambda_temp <- (-b + sqrt(disc)) / (3 * a)
         }
-
+        
         if (lambda_temp > 0.5 * lambda) {
           lambda_temp <- 0.5 * lambda
         }
       }
-
+      
       lambda_prev <- lambda
       y_prev <- y1
-
+      
       if (lambda_temp <= 0.1 * lambda) {
         lambda <- 0.1 * lambda
       } else {
@@ -197,7 +174,6 @@ ls <- function(x0, y0, fn, g0, d, maxstep, steptol, maxfcalcls) {
       }
     }
   }
-
   return(list(x1 = x1, y1 = y1, retcode = retcode, lambda = lambda, maxtaken = maxtaken, d = d, fcalcls = fcalcls))
 }
 
@@ -231,7 +207,7 @@ gfn <- function(x) {
 }
 
 n <- 4
-result <- optim01(britn = 15000, x0 = matrix(1+0*(1:n),ncol = 1)/5, fn = fn, gfn = gfn)
+result <- optim01(britn = 15000, x0 = matrix(1+0*(1:n),ncol = 1)/5, fn, gfn)
 print(result)
 result$x1  # Final value of x
 result$y1  # Final function value
