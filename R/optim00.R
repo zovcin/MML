@@ -13,7 +13,7 @@ optim00 <- function(britn, x0, fn, gfn ) {
   # Outputs:
   # List containing:
   #   x0: obtained final value
-  #   y0: function at ther obtained final value
+  #   y0: function at the obtained final value
   #   g0: gradient value at the final point
   #   termcode: termination reason
   #     0 = reached maximum number of iterations
@@ -33,7 +33,7 @@ optim00 <- function(britn, x0, fn, gfn ) {
   # Main loop
   for (itncount in 1:britn) {
     # Compute new point in the chosen direction
-    x1 <- x0 - alpha * t(g0)
+    x1 <- x0 - alpha * g0
     
     # Check if gradient norm is below tolerance
     if (sqrt(sum(g0^2)) <= gradtol) {
@@ -53,7 +53,7 @@ optim00 <- function(britn, x0, fn, gfn ) {
 
 # Deterministic function
 fn <- function(x) {
-  n <- length(x)
+  n <- 4
   a <- matrix(0, n, n)
   for (i in 1:n) {
     for (j in i:n) {
@@ -66,29 +66,22 @@ fn <- function(x) {
   ax4 <- ax^4
   
   y <- t(x) %*% (t(a) %*% a) %*% x + sum(ax3) / 10 + sum(ax4) / 100
-  return(y)
+  return(as.numeric(y))
 }
 
-# Gradient of deterministic function
+# Gradient of the function
 gfn <- function(x) {
-  n <- length(x)
-  a <- matrix(0, n, n)
-  for (i in 1:n) {
-    for (j in i:n) {
-      a[i, j] <- 1
-    }
-  }
-  a <- a / n
-  ax <- a %*% x
-  ax2 <- ax^2
-  ax3 <- ax^3
-  
-  g <- 2 * (t(a) %*% a) %*% x + 3 * a %*% ax2 / 10 + 4 * a %*% ax3 / 100
-  return(t(g))
+  g=c(
+    (2*x[1]+2*x[2]+2*x[3]+2*x[4]+(3/10)*(x[1]+x[2]+x[3]+x[4])^2+(1/25)*(x[1]+x[2]+x[3]+x[4])^3),
+    (2*x[1]+4*x[2]+4*x[3]+4*x[4]+(3/10)*(x[1]+x[2]+x[3]+x[4])^2+(3/10)*(x[2]+x[3]+x[4])^2+(1/25)*(x[1]+x[2]+x[3]+x[4])^3+(1/25)*(x[2]+x[3]+x[4])^3),
+    (2*x[1]+4*x[2]+6*x[3]+6*x[4]+(3/10)*(x[1]+x[2]+x[3]+x[4])^2+(3/10)*(x[2]+x[3]+x[4])^2+(3/10)*(x[3]+x[4])^2+(1/25)*(x[1]+x[2]+x[3]+x[4])^3+(1/25)*(x[2]+x[3]+x[4])^3+(1/25)*(x[3]+x[4])^3),
+    (2*x[1]+4*x[2]+6*x[3]+8*x[4]+(3/10)*(x[1]+x[2]+x[3]+x[4])^2+(3/10)*(x[2]+x[3]+x[4])^2+(3/10)*(x[3]+x[4])^2+(3/10)*x[4]^2+(1/25)*(x[1]+x[2]+x[3]+x[4])^3+(1/25)*(x[2]+x[3]+x[4])^3+(1/25)*(x[3]+x[4])^3+(1/25)*x[4]^3)
+  )
+  return(matrix(g,ncol=1))
 }
 
-n <- 40
-result <- optim00(britn = 10000, x0 = matrix(1+0*(1:n),ncol = 1)/5, fn = fn, gfn = gfn)
+n <- 4
+result <- optim00(britn = 50000, x0 = matrix(1+0*(1:n),ncol = 1)/5, fn = fn, gfn = gfn)
 print(result)
 result$x0  # Final value of x
 result$y0  # Final function value

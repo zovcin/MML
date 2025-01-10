@@ -138,7 +138,7 @@ ls <- function(x0, y0, fn, g0, d, maxstep, steptol, maxfcalcls) {
   }
 
   minlambda <- steptol / rellength
-  lambda <- 1
+  lambda <- 1.0
 
   if (maxfcalcls == 0) {
     x1 <- x0
@@ -216,28 +216,21 @@ fn <- function(x) {
   ax4 <- ax^4
 
   y <- t(x) %*% (t(a) %*% a) %*% x + sum(ax3) / 10 + sum(ax4) / 100
-  return(y)
+  return(as.numeric(y))
 }
 
-# Gradient of deterministic function
+# Gradient of the function
 gfn <- function(x) {
-  n <- length(x)
-  a <- matrix(0, n, n)
-  for (i in 1:n) {
-    for (j in i:n) {
-      a[i, j] <- 1
-    }
-  }
-  a <- a / n
-  ax <- a %*% x
-  ax2 <- ax^2
-  ax3 <- ax^3
-
-  g <- 2 * (t(a) %*% a) %*% x + 3 * a %*% ax2 / 10 + 4 * a %*% ax3 / 100
-  return(g)
+  g=as.vector(c(
+    (2*x[1]+2*x[2]+2*x[3]+2*x[4]+(3/10)*(x[1]+x[2]+x[3]+x[4])^2+(1/25)*(x[1]+x[2]+x[3]+x[4])^3),
+    (2*x[1]+4*x[2]+4*x[3]+4*x[4]+(3/10)*(x[1]+x[2]+x[3]+x[4])^2+(3/10)*(x[2]+x[3]+x[4])^2+(1/25)*(x[1]+x[2]+x[3]+x[4])^3+(1/25)*(x[2]+x[3]+x[4])^3),
+    (2*x[1]+4*x[2]+6*x[3]+6*x[4]+(3/10)*(x[1]+x[2]+x[3]+x[4])^2+(3/10)*(x[2]+x[3]+x[4])^2+(3/10)*(x[3]+x[4])^2+(1/25)*(x[1]+x[2]+x[3]+x[4])^3+(1/25)*(x[2]+x[3]+x[4])^3+(1/25)*(x[3]+x[4])^3),
+    (2*x[1]+4*x[2]+6*x[3]+8*x[4]+(3/10)*(x[1]+x[2]+x[3]+x[4])^2+(3/10)*(x[2]+x[3]+x[4])^2+(3/10)*(x[3]+x[4])^2+(3/10)*x[4]^2+(1/25)*(x[1]+x[2]+x[3]+x[4])^3+(1/25)*(x[2]+x[3]+x[4])^3+(1/25)*(x[3]+x[4])^3+(1/25)*x[4]^3)
+  ))
+  return(matrix(g,ncol=1))
 }
 
-n <- 40
+n <- 4
 result <- optim01(britn = 15000, x0 = matrix(1+0*(1:n),ncol = 1)/5, fn = fn, gfn = gfn)
 print(result)
 result$x1  # Final value of x

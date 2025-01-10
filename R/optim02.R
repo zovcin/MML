@@ -112,7 +112,6 @@ fdgrad <- function(xc, fc, fn, eta) {
     g[j] <- (fj - fc) / stepsizej
     xc[j] <- tempj
   }
-
   return(g)
 }
 
@@ -197,13 +196,12 @@ ls <- function(x0, y0, fn, g0, d, maxstep, steptol, maxfcalcls) {
       }
     }
   }
-
   return(list(x1 = x1, y1 = y1, retcode = retcode, lambda = lambda, maxtaken = maxtaken, d = d, fcalcls = fcalcls))
 }
 
 # Deterministic function
 fn <- function(x) {
-  n <- length(x)
+  n <- 4
   a <- matrix(0, n, n)
   for (i in 1:n) {
     for (j in i:n) {
@@ -214,13 +212,13 @@ fn <- function(x) {
   ax <- a %*% x
   ax3 <- ax^3
   ax4 <- ax^4
-
+  
   y <- t(x) %*% (t(a) %*% a) %*% x + sum(ax3) / 10 + sum(ax4) / 100
-  return(c(y))
+  return(as.numeric(y))
 }
 
 n <- 4
-result <- optim02(britn = 500, x0 = matrix(1+0*(1:n),ncol = 1)/5, fn = fn)
+result <- optim02(britn = 50000, x0 = matrix(1+0*(1:n),ncol = 1)/5, fn = fn)
 print(result)
 result$x1  # Final value of x
 result$y1  # Final function value

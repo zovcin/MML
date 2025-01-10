@@ -13,7 +13,7 @@ optim <- function(britn, x0, fn, gfn ) {
   # Outputs:
   # List containing:
   #   x0: obtained final value
-  #   y0: function at ther obtained final value
+  #   y0: function at the obtained final value
   #   g0: gradient value at the final point
   #   termcode: termination reason
   #     0 = reached maximum number of iterations
@@ -56,7 +56,7 @@ fn <- function(x) {
   a <- matrix(c(2,1,1,20), ncol = 2)
   b <- matrix(c(5,3), ncol = 1)
   y <- t(x) %*% a %*% x - t(b) %*% x
-  return(y)
+  return(as.numeric(y))
 }
 
 # Gradient of deterministic function
