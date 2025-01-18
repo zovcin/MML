@@ -49,6 +49,7 @@ get_minalpha <- function(x0, p) {
   STEP_TOL / rellength
 }
 
+total_ls_iter = 0
 line_search <- function(f, x0, g0, p, c1, c2) {
   i = 0
   MAX_ITER = 100
@@ -66,6 +67,7 @@ line_search <- function(f, x0, g0, p, c1, c2) {
     if (i == MAX_ITER) { return(list(code=1, alpha=alpha)) }
     if (min_alpha > alpha) { return(list(code=2, alpha=alpha)) }
     i = i + 1
+    total_ls_iter <<- total_ls_iter+1
     
     x = x0+alpha*p
     y = f(x)
@@ -83,6 +85,9 @@ line_search <- function(f, x0, g0, p, c1, c2) {
         } else {
           alpha_next = alpha*1.01
         }  
+      } else {
+        # both checks successful
+        break
       }
     }
     
@@ -161,6 +166,15 @@ shekel <- function(x) {
   -r
 }
 
+simple_fun <- function(x) {
+  -(x^3)-(x^2)+0.5*x^4+x+2
+}
+
 x = optimize(shekel, c(1,3,5,6), 250)
+#x = optimize(simple_fun, c(0), 250)
 print(x)
+
 print(shekel(x))
+#print(simple_fun(x))
+
+print(total_ls_iter)
