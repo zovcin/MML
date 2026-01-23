@@ -1,14 +1,20 @@
 # MML
 Matematičke osnove mašinskog učenja
 
-Ovo je je ripozitorijum za razmenu materijala vezanog za predmet Matematičke osnove mašinskog učenja na Master akademskim studijama Veštačka inteligencija i mašinsko učenje na Fakultetu tehničkih nauka Univerziteta u Novom Sadu.
+Ovo je ripozitorijum za razmenu materijala vezanog za predmet Matematičke osnove mašinskog učenja na Master akademskim studijama Veštačka inteligencija i mašinsko učenje na Fakultetu tehničkih nauka Univerziteta u Novom Sadu.
 
 Sintaksa razmene tekstova je objašnjena u [Markdown](https://en.wikipedia.org/wiki/Markdown).
 
-**Sadržaj predmeta:**
+Knjiga po kojoj se radi je [MML-Book](https://mml-book.github.io/).
+
+[GitHub](https://github.com/zovcin/MML) ripozitori koji ćemo koristiti.
+
+**Materijal:**
 
 - [Preduslovi](#Preduslovi)
-- [Seminarski](Seminarski)
+- [Domaći zadaci](#Domaći)
+- [Seminarski](#Seminarski)
+
 
 ## Preduslovi
 
@@ -26,7 +32,24 @@ https://imft.ftn.uns.ac.rs/~Ksenija/Algebra_SW.html
 
 https://people.dmi.uns.ac.rs/~anna.slivkova/Zadaci%20iz%20linearne%20algebre.pdf
 
+
+## Domaći
+
+Za generaciju koja sluša školske godine 2025 / 2026, drugi kolokvijum se radi preko 4 domaća zadatka:
+1. U R-u isprogramirati svd funkciju koja će raditi kao što radi svd dekompozicija u MML-Book. Može se koristiti funkcija eigen iz R-a i GramSchmidt iz Matliba.
+2. Koristeći svd rešiti zadatke iz [Kolokvijuma 1](https://nblok306.ftn.uns.ac.rs/~zoran/A/AI/master_AI_kol1_2025_2026.pdf).
+3.
+4.
+
+Prijaviti se za colaborator na [ripozitoriju](https://github.com/zovcin/MML).
+
+Rešenja zadataka staviti na ripozitori u folder sa svojim brojem indeksa i postaviti Pull request.
+
 ## Seminarski
+
+Za generaciju koja sluša školske godine 2024 / 2025, drugi kolokvijum se radi preko seminarskog rada.
+
+Rešenja zadatka staviti na ripozitori u folder sa svojim brojem indeksa i postaviti Pull request.
 
 E9-05-2021 Problem 5.1 Backtracking LS Rešeno - 20 bodova
 
