@@ -38,8 +38,8 @@ https://people.dmi.uns.ac.rs/~anna.slivkova/Zadaci%20iz%20linearne%20algebre.pdf
 Za generaciju koja sluša školske godine 2025 / 2026, drugi kolokvijum se radi preko 4 domaća zadatka:
 1. U R-u isprogramirati svd funkciju koja će raditi kao što radi svd dekompozicija u MML-Book. Može se koristiti funkcija eigen iz R-a i GramSchmidt iz Matliba.
 2. Koristeći svd rešiti zadatke iz [Kolokvijuma 1](https://nblok306.ftn.uns.ac.rs/~zoran/A/AI/master_AI_kol1_2025_2026.pdf).
-3.
-4.
+3. Isprogramirati u R-u gradijentni postupak za nalaženje 100 iteracija problema Example 7.1 sa strane 228 iz [MML-Book](https://mml-book.github.io/)
+4. Naći 100 iteracija Gradient descent postupka za jedan od problema 5.1 - 5.6 na stranama 12 - 14 iz [folije02.pdf](https://nblok306.ftn.uns.ac.rs/~zoran/A/AI/folije02.pdf)
 
 Prijaviti se za colaborator na [ripozitoriju](https://github.com/zovcin/MML).
 
