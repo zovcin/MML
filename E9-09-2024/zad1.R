@@ -12,12 +12,16 @@ svd_fun <- function(A) {
   
   singular_values <- sqrt(pmax(eg$values, 0))
 
-  U = matrix(0, m, n)
+  U_tmp = matrix(0, m, m)
   for (i in 1:n) {
     if (singular_values[i] > 1e-30) {
-      U[, i] <- (A %*% V[, i]) / singular_values[i]
+      U_tmp[, i] <- (A %*% V[, i]) / singular_values[i]
     }
   }
+  
+  U_tmp = cbind(U_tmp, diag(m))
+  
+  U = GramSchmidt(U_tmp, normalize = TRUE)
   
   return(list(
     d = singular_values,
@@ -45,7 +49,11 @@ r_svd
 # prilikom izracunavanje eigen vektora i vrenosti, i porede sa originalnim   
 # vrednostima matrice A mozemo videti da razlika nema, odnosno da je SVD tacno izracunat
 
-B = round(svd_test$u %*% diag(svd_test$d) %*% t(svd_test$v))
+Sigma <- matrix(0, nrow(A), ncol(A))
+diag(Sigma) <- svd_test$d
+
+# Now the dimensions match: (7x7) %*% (7x6) %*% (6x6)
+B = round(svd_test$u %*% Sigma %*% t(svd_test$v))
 B == A
 
 # Pri poredjenju singularnih vrednosti mozemo videti da su razlike minimalne, a 
