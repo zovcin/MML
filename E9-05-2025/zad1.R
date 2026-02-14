@@ -3,19 +3,19 @@ library(matlib)
 bole_SVD = function(A) {
   AtA = t(A) %*% A
   eig = eigen(AtA)
+  rank_A <- R(A)
 
   lambda = eig$values
+  lambda[(rank_A + 1):length(lambda)] = 0
   d = sqrt(lambda)
-  d[is.nan(d)] = 0
 
   V = GramSchmidt(eig$vectors, normalize = TRUE)
+  V = V[, 1:rank_A]
 
   # u_i = A%*%v_i / sigma_i
-  U = matrix(0, nrow(A), ncol(A))
-  for (i in 1:ncol(A)) {
-    if (d[i] > sqrt(.Machine$double.eps)) {
+  U = matrix(0, nrow(A), rank_A)
+  for (i in 1:rank_A) {
       U[, i] = (A %*% V[, i]) / d[i]
-    }
   }
 
   list(d = d, u = U, v = V)
@@ -40,7 +40,11 @@ svd_d <- zapsmall(svd(A)$d); svd_d
 all(result_d == svd_d)
 
 # poredjenje matrica
-A2 = result$u %*% diag(result$d) %*% t(result$v)
+u = result$u
+d = diag(result$d)[1:R(A),1:R(A)]
+vt = t(result$v)
+cat("U:", dim(u), "\nD:", dim(d), "\nVt:", dim(vt), "\n")
+A2 = u %*% d %*% vt
 A_z <- zapsmall(A); A_z
 A2_z <- zapsmall(A2); A2_z
 all(A_z == A2_z)
