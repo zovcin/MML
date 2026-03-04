@@ -1,0 +1,62 @@
+---
+title: "d4"
+output: html_document
+date: "2026-02-25"
+---
+##5.1
+```{r}
+n=4
+A=matrix(0,n,n)
+A[upper.tri(A,diag=TRUE)]=1 
+fc=function(x) {
+  Ax=A%*%x
+  t1=t(x)%*%t(A)%*%A%*%x
+  t2=0.1*sum(Ax^3)
+  t3=0.01*sum(Ax^4)
+  return(as.numeric(t1+t2+t3))
+}
+
+gf=function(x) {
+  Ax=A%*%x
+  g1=2*t(A)%*%A%*%x
+  g2=0.1*3*t(A)%*%(Ax^2)
+  g3=0.01*4*t(A)%*%(Ax^3)
+  return(as.vector(g1+g2+g3))
+}
+```
+
+
+```{r}
+xk=rep(0.2, n)
+alpha=0.01 
+mi= 100
+
+is=data.frame(
+  it=0:mi, 
+  fv=numeric(mi+1)
+)
+is$fv[1]=fc(xk)
+```
+
+
+```{r}
+for (k in 1:mi) {
+  pk=-gf(xk)
+  xk=xk+alpha*pk
+  is$fv[k+1]=fc(xk)
+}
+
+print(paste("Finalna vrednost funkcije:", fc(xk)))
+print("Finalne vrednosti x vektora:")
+print(xk)
+```
+
+```{r}
+plot(is$it, is$fv, type = "b", 
+     pch = 19, col = "deeppink",
+     xlab = "Iteracija", ylab = "f(x)", 
+     main = "Konvergencija gradient descent postupka")
+
+grid()
+```
+
