@@ -1,0 +1,63 @@
+---
+title: "domaci1"
+output: html_document
+date: "2026-02-17"
+---
+```{r}
+library(matlib)
+```
+
+
+```{r}
+svd2=function(A) {
+  A=as.matrix(A)
+  m=nrow(A)
+  n=ncol(A)
+  AtA=t(A)%*%A
+  eAtA=eigen(AtA)
+  sv=sqrt(pmax(eAtA$values, 0))
+  V=GramSchmidt(eAtA$vectors)
+  AAt=A%*%t(A)
+  eAAt=eigen(AAt)
+  U=GramSchmidt(eAAt$vectors)
+  k=min(m, n)
+  for (i in 1:k) {
+    if (sv[i] > 1e-10) {
+      if (sum(U[,i]*(A%*%V)[,i])<0) {
+        U[,i]=-U[,i]
+      }
+    }
+  }
+  sm=matrix(0, m, n)
+  diag(sm)[1:k]=sv[1:k]
+  
+  return(list(U=U,sigma=sm,V=V,d=sv[1:k]))
+}
+```
+
+
+
+```{r}
+A=matrix(c(3,2,2,2,3,-2),nrow=2,byrow=TRUE)
+
+svd2A=svd2(A)
+svdA=svd(A)
+
+print("svd2:")
+print(svd2A$d)
+
+print("svd:")
+print(svdA$d)
+```
+
+```{r}
+Ar=svd2A$U %*% svd2A$sigma %*% t(svd2A$V)
+print("Originalna matrica:")
+print(A)
+print("Rekonstruisana matrica:")
+print(round(Ar, 10))
+```
+
+
+
+
